@@ -26,7 +26,7 @@ Hooks call the `typecheck`, `lint` and `test` scripts in package.json. Keep thos
 
 `discover > spec > plan > build-task > verify > peer-review > gate-security > ship`
 
-You are the only orchestrator. Do not skip a stage. Use a subagent only for the two read-only reviewers. Specs live in `docs/specs/`, plans in `docs/plans/`, decisions in `docs/decisions/` and the running log `docs/decisions.md`. These paths override any default path a skill suggests.
+You are the only orchestrator. Do not skip a stage. Use a subagent only for the two read-only reviewers. Specs live in `docs/specs/`, plans in `docs/plans/`, the architecture diagrams in `docs/architecture.md` (written by `/plan`, updated by any task that changes a component, table or service), decisions in `docs/decisions/` and the running log `docs/decisions.md`. These paths override any default path a skill suggests.
 
 ## Human gates (the owner decides, you never do)
 
