@@ -1,0 +1,8 @@
+--- react-best-practices/SKILL.md (audited)
++++ react-best-practices/SKILL.md (vendored)
+@@ -146,4 +146,4 @@
+ 
+ ## Full Compiled Document
+ 
+-For the complete guide with all rules expanded: `AGENTS.md`
++For the complete guide, read the rule files in `rules/`.

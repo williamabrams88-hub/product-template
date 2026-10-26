@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # One job, one required status check named "checks". App steps run only once the project has a package.json,
+  # so the template itself passes by running its own hook and script tests.
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: ${{ hashFiles('package-lock.json') != '' && 'npm' || '' }}
+
+      - name: Hook and script tests
+        run: node --test ".claude/hooks/tests/*.test.mjs" "scripts/tests/*.test.mjs"
+
+      - name: Install
+        if: hashFiles('package.json') != ''
+        run: npm ci
+
+      - name: Typecheck
+        if: hashFiles('package.json') != ''
+        run: npm run typecheck
+
+      - name: Lint
+        if: hashFiles('package.json') != ''
+        run: npm run lint
+
+      - name: Unit tests
+        if: hashFiles('package.json') != ''
+        run: npm run test
+
+      - name: Build
+        if: hashFiles('package.json') != ''
+        run: npm run build
+
+      - name: Accessibility (axe through Playwright)
+        if: hashFiles('package.json') != ''
+        run: |
+          npx playwright install --with-deps chromium
+          npm run a11y
+
+      - name: Core Web Vitals budget (Lighthouse CI)
+        if: hashFiles('package.json') != ''
+        run: npx lhci autorun
+
+      - name: Dependency audit
+        if: hashFiles('package.json') != ''
+        run: npm audit --omit=dev --audit-level=high
+
+      # Added at checkpoint C4 only if GitHub secret scanning is not available on the owner's plan:
+      # a gitleaks step, vetted like any other third-party item.

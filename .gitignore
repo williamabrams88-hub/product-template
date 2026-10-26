@@ -1,0 +1,27 @@
+# Secrets. Never commit these.
+.env
+.env.*
+!.env.example
+
+# Dependencies and build output
+node_modules/
+.next/
+dist/
+build/
+coverage/
+playwright-report/
+test-results/
+
+# Superpowers scratch workspace
+.superpowers/
+
+# Claude Code local files
+.claude/settings.local.json
+.claude/.cc-writes/
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+next-env.d.ts
+*.tsbuildinfo

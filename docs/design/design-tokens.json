@@ -1,0 +1,18 @@
+{
+  "_note": "Placeholder values so the contrast check has something to run on. /ingest-design replaces them in a project.",
+  "colors": {
+    "text": "#111111",
+    "background": "#ffffff",
+    "primary": "#1d4ed8",
+    "on-primary": "#ffffff"
+  },
+  "pairs": [
+    { "fg": "text", "bg": "background", "use": "text" },
+    { "fg": "on-primary", "bg": "primary", "use": "text" }
+  ],
+  "typography": { "scale": [] },
+  "spacing": [],
+  "radius": [],
+  "elevation": [],
+  "motion": { "reduced": "no animation" }
+}

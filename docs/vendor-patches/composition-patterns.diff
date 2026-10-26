@@ -1,0 +1,8 @@
+--- composition-patterns/SKILL.md (audited)
++++ composition-patterns/SKILL.md (vendored)
+@@ -86,4 +86,4 @@
+ 
+ ## Full Compiled Document
+ 
+-For the complete guide with all rules expanded: `AGENTS.md`
++For the complete guide, read the rule files in `rules/`.

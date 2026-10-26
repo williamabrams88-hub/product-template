@@ -1,0 +1,5 @@
+# Keep line endings as LF so hook scripts behave the same on Windows, WSL and CI.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary
