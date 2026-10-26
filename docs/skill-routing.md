@@ -78,4 +78,17 @@ Manual-only skills (`ship`, `new-project`, `retro`) must never fire from a promp
 
 ## 5. Results
 
-Not yet run. Record here: date, skill, fired on N of 3, stayed quiet on N of 3, fix applied. Also record the total skill-description cost from `/context`.
+Routing tests: not yet run. Record here: date, skill, fired on N of 3, stayed quiet on N of 3, fix applied.
+
+### Token cost, measured with `/context` on 2026-10-26 (Claude Code 2.1.308, Sonnet 5.5, Superpowers 7.0.1 installed)
+
+| Item | Tokens | Earlier estimate |
+|---|---|---|
+| CLAUDE.md (memory file) | 2.1k | not estimated |
+| Our 8 auto-invocable workflow skills | about 1,210 | about 900 |
+| 4 vendored skills listed (react-best-practices, composition-patterns, frontend-design, web-design-guidelines) | about 390 | not estimated |
+| Superpowers, 15 skills | about 960 | 1,500 to 2,000 |
+| Project agents (reviewer, security-reviewer) | 80 | not estimated |
+| Template total (skills + CLAUDE.md + agents) | about 4.7k | not estimated |
+
+Not in the list: `supabase` and `supabase-postgres-best-practices`. Probably hidden by their `paths` scope until Supabase files are touched; to confirm. Not counted: the user-level caveman plugin, MCP connectors (47.8k) and built-in skills, which are the owner's personal setup, not the template's. Total session at start of this check: 158.5k of 1m (16%), mostly this long build conversation.
