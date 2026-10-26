@@ -1,0 +1,38 @@
+# Stack profile: web (TypeScript, Next.js App Router, Supabase, Vercel).
+# To add another stack, copy this file to profiles/<name>.yaml, change the values,
+# then select it with stack_profile in project.config.yaml. /new-project reads this file.
+
+name: web
+node_version: 22
+
+# Verified against nextjs.org/docs/app/api-reference/cli/create-next-app on 2026-10-26.
+# No --src-dir, so app/ and components/ sit at the project root (the rules paths assume this).
+scaffold:
+  command: >-
+    npx create-next-app@latest {{NAME}} --ts --app --eslint --tailwind
+    --import-alias "@/*" --use-npm --disable-git --no-agent-feedback --yes
+  dev_dependencies:
+    - vitest
+    - "@playwright/test"
+    - "@axe-core/playwright"
+    - prettier
+    - "@vitest/coverage-v8"
+    - "@lhci/cli"
+
+# Names hooks and CI depend on. /new-project writes these into package.json.
+scripts:
+  typecheck: tsc --noEmit
+  lint: eslint .
+  test: vitest run
+  build: next build
+  a11y: playwright test --project=a11y
+  dev: next dev
+
+rule_globs:
+  frontend: ["app/**", "components/**"]
+  backend: ["app/api/**", "lib/server/**", "supabase/functions/**"]
+  database: ["supabase/**"]
+  testing: ["**/*.test.*", "tests/**", "e2e/**"]
+
+hosting: vercel
+database: supabase

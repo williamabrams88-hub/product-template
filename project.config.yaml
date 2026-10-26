@@ -1,0 +1,16 @@
+# Project configuration. Read by /spec, /gate-security, /ship and /new-project.
+# Hooks do not read this file; they use the scripts in package.json.
+
+is_template: true             # /new-project sets this to false in a project copy; skills that specialise a project refuse to run while true
+stack_profile: web          # profiles/<name>.yaml. Only "web" ships today.
+
+# Capability flags. Everything defaults to false except uk_market.
+handles_personal_data: false    # unlocks docs/compliance/data-map, privacy notice, DPIA, breach runbook
+handles_payments: false         # unlocks docs/compliance/payments.md and webhook and idempotency checks
+handles_financial_data: false   # hard stop in /ship: take professional regulatory advice before launch
+uses_ai_features: false         # requires an eval suite, versioned prompts, fallbacks, usage caps
+uk_market: true                 # UK defaults: en-GB, GBP, ICO guidance, UK GDPR
+
+# Reserved extension point. Disabled. See docs/strategy/impact.md.
+planetary_impact_metrics:
+  enabled: false
