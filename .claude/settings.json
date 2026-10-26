@@ -1,0 +1,131 @@
+{
+  "env": {
+    "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "1",
+    "SUPERPOWERS_DISABLE_TELEMETRY": "1"
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "filesystem": {
+      "denyRead": ["~/.ssh", "~/.aws", "~/.gnupg", "~/.config/gh"]
+    }
+  },
+  "permissions": {
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git push * -f)",
+      "Bash(git push * -f *)",
+      "Bash(git push * --mirror*)",
+      "Bash(git reset --hard origin*)",
+      "Bash(git reset --hard */*)",
+      "Read(**/.env)",
+      "Read(**/.env.local)",
+      "Read(**/.env.*.local)",
+      "Read(**/.env.production)",
+      "Read(**/.env.development)",
+      "Read(**/secrets/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.config/gh/**)"
+    ],
+    "ask": [
+      "Bash(gh pr merge *)",
+      "Bash(git merge *)",
+      "Bash(gh repo *)",
+      "Bash(gh issue *)",
+      "Bash(gh api *)",
+      "Bash(gh release *)",
+      "Bash(gh workflow *)",
+      "Bash(gh secret *)",
+      "Bash(vercel *)",
+      "Bash(supabase db push*)",
+      "Bash(supabase db reset*)",
+      "Bash(supabase migration *)",
+      "Bash(supabase link*)",
+      "Bash(git remote add *)",
+      "Bash(git remote set-url *)",
+      "Bash(npm publish*)",
+      "mcp__*supabase*",
+      "mcp__*vercel*"
+    ],
+    "allow": [
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(npm run typecheck*)",
+      "Bash(npm run lint*)",
+      "Bash(npm run test*)",
+      "Bash(npm run build*)",
+      "Bash(node --test *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-branch.mjs\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/hooks/secret-scan.mjs\"",
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/hooks/format-and-lint.mjs\"",
+            "timeout": 60
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/hooks/quality-gate.mjs\"",
+            "timeout": 900
+          }
+        ]
+      }
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "pinned-plugins": {
+      "source": {
+        "source": "settings",
+        "name": "pinned-plugins",
+        "owner": { "name": "product-template" },
+        "plugins": [
+          {
+            "name": "superpowers",
+            "description": "Superpowers v7.0.1 pinned to the commit audited in docs/skill-vetting.md",
+            "source": {
+              "source": "github",
+              "repo": "obra/superpowers",
+              "sha": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "enabledPlugins": {
+    "superpowers@pinned-plugins": true
+  }
+}
