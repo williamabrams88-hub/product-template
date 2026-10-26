@@ -9,7 +9,7 @@ description: Runs the read-only reviewer subagent in a fresh context on the curr
 2. Find the base: `git merge-base main HEAD` (use `master` if that is the default branch). Write the diff to a file in `$TMPDIR`:
    `git diff <base>...HEAD > "$TMPDIR/review.diff"`
 3. Find the spec and the plan task for this branch in `docs/specs/` and `docs/plans/`.
-4. Start the `reviewer` agent. Give it only: the path to the diff, the path to the spec, and the task text. Do not paste your own opinion of the change, and do not name a different model.
+4. Start the `reviewer` agent. Give it only: the path to the diff, the path to the spec, the path to `docs/architecture.md`, and the task text. Do not paste your own opinion of the change, and do not name a different model.
 5. Read its report. For each finding decide: fix it, or explain why not. Blocking findings must be fixed or the owner must accept them knowingly.
 6. Fix with `/build-task` rules: test first, minimal change, re-run `/verify`.
 7. Report to the owner in plain English:

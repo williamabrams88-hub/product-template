@@ -17,9 +17,10 @@ Follow the Behaviour section of CLAUDE.md. Every changed line must trace to the 
 
 1. Load `superpowers:test-driven-development`. Write the failing test, run it, and read why it fails. Then write the minimum code to pass.
 2. Match existing style. Do not refactor nearby code. Mention unrelated problems; do not fix them.
-3. Mark any deliberate shortcut as `// shortcut: <what was skipped and why, what changes if requirements grow>`.
-4. Commit in small steps with conventional messages (`feat:`, `fix:`, `test:`, `docs:`, `chore:`). One task is one pull request. Do not push.
-5. If something fails twice, stop guessing and load `superpowers:systematic-debugging`.
+3. If the task adds or changes a component, a table or an external service, update the matching diagram in `docs/architecture.md` in the same commit.
+4. Mark any deliberate shortcut as `// shortcut: <what was skipped and why, what changes if requirements grow>`.
+5. Commit in small steps with conventional messages (`feat:`, `fix:`, `test:`, `docs:`, `chore:`). One task is one pull request. Do not push.
+6. If something fails twice, stop guessing and load `superpowers:systematic-debugging`.
 
 ## Finish
 

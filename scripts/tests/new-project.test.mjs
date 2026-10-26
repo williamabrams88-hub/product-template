@@ -35,6 +35,14 @@ test('dry run creates a complete, specialised local project and commits it', () 
   assert.match(log.stdout, /create demo from product template/);
 });
 
+test('the project starts with an architecture skeleton holding the four diagrams', () => {
+  const parent = mkdtempSync(path.join(os.tmpdir(), 'np-'));
+  assert.equal(run(['demo', '--skip-scaffold'], parent).status, 0);
+  const text = readFileSync(path.join(parent, 'demo', 'docs/architecture.md'), 'utf8');
+  for (const kind of ['flowchart', 'erDiagram']) assert.match(text, new RegExp('```mermaid\\n' + kind), kind);
+  assert.equal((text.match(/```mermaid/g) ?? []).length, 4);
+});
+
 test('refuses an existing folder and a bad name', () => {
   const parent = mkdtempSync(path.join(os.tmpdir(), 'np-'));
   assert.equal(run(['demo', '--skip-scaffold'], parent).status, 0);

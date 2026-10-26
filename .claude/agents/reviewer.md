@@ -20,6 +20,7 @@ Report only these, in this order. Skip style, naming taste and formatting; tools
    - an abstraction with a single caller,
    - a shortcut without a `// shortcut:` comment,
    - an unrequested refactor.
+5. Architecture drift: the diff adds or changes a component, a table or an external service, but `docs/architecture.md` does not show it (blocking), or the diagram shows something the code no longer does (advisory). You may be given the path to `docs/architecture.md`.
 
 For each finding give: file and line, what is wrong, why it matters, and a suggested fix in one sentence. Mark each as blocking or advisory. If you find nothing in a category, say "none". Do not pad. Do not praise.
 
