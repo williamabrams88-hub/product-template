@@ -24,8 +24,14 @@ if (input.tool_name !== 'Bash') process.exit(0);
 
 const command = input.tool_input?.command ?? '';
 const cwd = input.cwd || process.cwd();
-const commits = gitCalls(command).filter((c) => c.sub === 'commit');
+const calls = gitCalls(command);
+const commits = calls.filter((c) => c.sub === 'commit');
 if (commits.length === 0) process.exit(0);
+
+// This hook runs before the command, so files staged by the same command are not in the index yet.
+if (calls.some((c) => c.sub === 'add')) {
+  block('Blocked by secret-scan. Run `git add` and `git commit` as separate commands so the staged files can be scanned. Nothing was committed.');
+}
 
 const findings = [];
 for (const commit of commits) {

@@ -43,6 +43,16 @@ test('allows clean commits, example env files and placeholders', () => {
   assert.equal(runHook('secret-scan.mjs', bash('git commit -m ok', placeholder.dir)).code, 0);
 });
 
+test('blocks a command that stages and commits together, because the index is empty when the hook runs', () => {
+  const repo = tempRepo('feature/x');
+  writeFileSync(path.join(repo.dir, 'config.ts'), `export const key = '${fakeAwsKey}';\n`);
+  for (const command of ['git add config.ts && git commit -m x', 'git add -A; git commit -m x', 'git -C . add . && git -C . commit -m x']) {
+    const r = runHook('secret-scan.mjs', bash(command, repo.dir));
+    assert.equal(r.code, 2, command);
+    assert.match(r.stderr, /separate/);
+  }
+});
+
 test('ignores commands that are not commits', () => {
   const repo = stage('config.ts', `export const key = '${fakeAwsKey}';\n`);
   assert.equal(runHook('secret-scan.mjs', bash('git status', repo.dir)).code, 0);
