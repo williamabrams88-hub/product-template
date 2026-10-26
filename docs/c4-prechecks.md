@@ -1,3 +1,5 @@
+> Superseded at C4: the owner declined gitleaks and chose a public repository, so GitHub's free secret scanning and push protection are used instead. See docs/decisions.md. The gitleaks notes below are kept as the record of what was vetted.
+
 # Checks before any remote action (checkpoint C4)
 
 Checked on 26 October 2026 against official documentation. Nothing remote has been created or changed.

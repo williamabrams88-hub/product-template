@@ -62,5 +62,5 @@ jobs:
         if: hashFiles('package.json') != ''
         run: npm audit --omit=dev --audit-level=high
 
-      # Added at checkpoint C4 only if GitHub secret scanning is not available on the owner's plan:
-      # a gitleaks step, vetted like any other third-party item.
+      # No gitleaks step: the owner declined it at checkpoint C4. The repository is public, so GitHub
+      # secret scanning and push protection cover it, plus the local secret-scan hook.

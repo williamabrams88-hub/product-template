@@ -9,6 +9,10 @@ argument-hint: <project-name> [--dry-run]
 
 Run from the template folder. Never edit the template itself; the project is a copy.
 
+## Check the plugin registration first
+
+Run `claude plugin marketplace list`. If `pinned-plugins` is missing, tell the owner to run the two commands in README.md under one-off setup, and wait. The copy carries `.claude-plugin/marketplace.json` and the Superpowers setting, but a new computer must register the marketplace once. The registration points at the template folder, so do not move or delete it.
+
 ## Always start with a dry run
 
 1. Run `bash scripts/new-project.sh <name> --dry-run`. It copies the template to a sibling folder `../<name>`, sets `is_template: false`, fills the CLAUDE.md placeholders from `profiles/<stack_profile>.yaml`, empties the template-only logs, and starts a local git repository. No GitHub, Vercel or Supabase calls. Add `--skip-scaffold` to avoid the npm download.

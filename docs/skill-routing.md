@@ -2,21 +2,21 @@
 
 Method: one main-thread orchestrator (the session), a fixed stage order in CLAUDE.md, routing by skill description, and subagents only for isolated read-only work (the `reviewer` and `security-reviewer`). Basis: Anthropic's "Building effective agents" (use the simplest design that works) and the Claude Code skills and sub-agents documentation.
 
-Status of testing: descriptions written and overlap-checked on paper. Live routing tests (section 4) are NOT yet run. They need the Superpowers plugin installed and the vendored skills copied in, then the skill-creator eval loop. Pass rates will be recorded in section 5.
+Status of testing: descriptions written and overlap-checked on paper. Superpowers and the vendored skills are now installed, but the live routing tests (section 4) are NOT run, because they spend Pro usage (see OQ-23). Pass rates will be recorded in section 5.
 
 ## 1. Matrix
 
 | Use case | Skill | Where it runs | Status |
 |---|---|---|---|
 | Strategy, market, kill criteria | own `discover` | main | written |
-| Feature design conversation | `superpowers:brainstorming`, then own `spec` | main | plugin not yet installed |
+| Feature design conversation | `superpowers:brainstorming`, then own `spec` | main | installed (7.0.1) |
 | Spec with metric and verification | own `spec` | main | written |
 | Task plan | own `plan` (calls `superpowers:writing-plans`) | main, Sonnet | written |
 | Build one task | own `build-task` (calls `superpowers:test-driven-development`) | main | written |
-| Bug or failing test | `superpowers:systematic-debugging` | main | plugin not yet installed |
-| React or Next.js code | `react-best-practices`, `composition-patterns` | main, loads for app and components | staged, not yet copied in |
-| UI and accessibility review | `web-design-guidelines`, `frontend-design` | main | staged, not yet copied in |
-| Database, RLS, migrations | `supabase`, `supabase-postgres-best-practices` | main, loads for supabase files | staged, not yet copied in |
+| Bug or failing test | `superpowers:systematic-debugging` | main | installed (7.0.1) |
+| React or Next.js code | `react-best-practices`, `composition-patterns` | main, loads for app and components | vendored |
+| UI and accessibility review | `web-design-guidelines`, `frontend-design` | main | vendored |
+| Database, RLS, migrations | `supabase`, `supabase-postgres-best-practices` | main, loads for supabase files | vendored |
 | Run all checks | own `verify` (deliberate name; Claude Code runs it before commits) | main | written |
 | Independent review | own `peer-review` then `reviewer` agent | subagent, read-only | written |
 | Security gate | own `gate-security` then `security-reviewer` agent | subagent, read-only | written |
@@ -78,7 +78,7 @@ Manual-only skills (`ship`, `new-project`, `retro`) must never fire from a promp
 
 ## 5. Results
 
-Routing tests: not yet run. Record here: date, skill, fired on N of 3, stayed quiet on N of 3, fix applied.
+Routing tests: not run (OQ-23). Record here: date, skill, fired on N of 3, stayed quiet on N of 3, fix applied.
 
 ### Token cost, measured with `/context` on 2026-10-26 (Claude Code 2.1.308, Sonnet 5.5, Superpowers 7.0.1 installed)
 
