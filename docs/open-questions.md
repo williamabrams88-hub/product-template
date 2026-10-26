@@ -14,7 +14,7 @@ Format: ID, question, why it matters, status. Items marked "template" must be ha
 - OQ-4. vercel-labs/agent-skills has no LICENSE file. README and two SKILL.md files declare MIT. Accepted with a NOTICE file (D-3, 26 October 2026). Status: closed.
 - OQ-6. Permission syntax checked against the permissions docs: `Bash(cmd *)` with a space, `mcp__*` style globs in deny and ask rules, Read/Edit path patterns. Still to test: that `mcp__*supabase*` matches real tool names once a Supabase MCP server exists. Status: partly closed.
 - OQ-7. The skills docs page was only partly read (the last 18,000 characters were not fetched). Re-fetch the remainder when writing our own skills, especially anything on `paths` frontmatter and the combined description cap. Status: open.
-- OQ-8. Whether `claude plugin validate` accepts a `.claude/skills` folder that is not inside a plugin. Needed for the Phase 4 test step. Status: open.
+- OQ-8. `claude plugin validate .claude/skills` accepts a skills folder and reported "Validation passed" on the 11 own skills (26 October 2026). Status: closed.
 - OQ-9. The Supabase skills were tested by nobody here against a running Supabase project. Their rules are only checked in Phase 7 on the sample build. Status: open.
 - OQ-10. `paths` verified: skills take a comma-separated string or YAML list; rules take a YAML list with quoted globs. Status: closed.
 - OQ-11. Items the brief listed as unverified and now resolved in docs/skill-vetting.md: latest releases for superpowers (v7.0.1) and spec-kit (v1.2.3); last push and release for supabase/agent-skills and BMAD-METHOD; licence terms for anthropics/skills and vercel-labs/agent-skills. Status: closed, except OQ-4.
@@ -23,3 +23,8 @@ Format: ID, question, why it matters, status. Items marked "template" must be ha
 - OQ-14. The inline "settings" marketplace and the sha-pinned plugin source have not been installed yet. Run `claude plugin install superpowers@pinned-plugins` (owner action, R3), then `claude plugin list` and `/context`. Status: open.
 - OQ-15. Vendored skills could not be copied by Bash (sandbox protects .claude/skills, and the auto-mode classifier refused an unsandboxed copy). The owner runs scratchpad/install_vendor.sh. Status: open.
 - OQ-16. Superpowers' own SessionStart hook injects its skill-use rule into every session, and all 15 skills load. Measure with `/context` after install and compare with the estimate in docs/skill-vetting.md section 6. Status: open.
+- OQ-17. Which GitHub plan is the owner on? Rulesets on private repositories need Pro, Team or Enterprise. See docs/c4-prechecks.md. Status: open, needed at C4.
+- OQ-18. Which Vercel plans offer the "Auto-assign Custom Production Domains" toggle? Not stated in the docs page read. Status: open, needed at C4.
+- OQ-19. gitleaks CI step proposed but not added; needs owner approval (third-party code). Source was not read, only the checksum is pinned. Status: open.
+- OQ-20. The new-project script was tested with --skip-scaffold only. The real scaffold (npx create-next-app and the dev dependencies) needs network access to the npm registry and has not been run. Status: open, Phase 7.
+- OQ-21. A `caveman` plugin is installed in the owner's user scope (not installed by this work). It rewrites some tool output in this session ("caveman" notes). Check that it does not hide hook or test output when running the self-test. Status: open.
