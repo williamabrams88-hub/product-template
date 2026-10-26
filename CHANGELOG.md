@@ -8,3 +8,4 @@ The template changes only through a reviewed pull request with an entry here.
 - secret-scan now blocks a single command that chains a stage and a commit, because the hook cannot see files staged by the same command. Found by a live test; regression test added.
 - new-project checks that the pinned-plugins marketplace is registered before copying.
 - CI comment and C4 notes updated: no gitleaks step (owner declined); the public repository uses GitHub's own secret scanning.
+- Template repository published at williamabrams88-hub/product-template (public) with secret scanning, push protection and the protect-main ruleset.
