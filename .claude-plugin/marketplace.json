@@ -1,0 +1,16 @@
+{
+  "name": "pinned-plugins",
+  "owner": { "name": "product-template" },
+  "metadata": { "description": "Third-party plugins pinned to commits audited in docs/skill-vetting.md" },
+  "plugins": [
+    {
+      "name": "superpowers",
+      "description": "Superpowers v7.0.1 pinned to the commit audited in docs/skill-vetting.md",
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers",
+        "sha": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b"
+      }
+    }
+  ]
+}

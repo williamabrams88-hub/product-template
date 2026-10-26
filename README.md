@@ -16,7 +16,7 @@ You do not need to read code to use it.
 
 1. Use WSL 2 (Ubuntu) with VS Code, Node 22, Git and the GitHub CLI (`gh auth login`).
 2. Install Claude Code from Anthropic's apt repository. Leave `ANTHROPIC_API_KEY` unset so usage stays on your Pro plan.
-3. Install the pinned Superpowers plugin once: `claude plugin install superpowers@pinned-plugins`.
+3. Install the pinned Superpowers plugin once. First register this folder's marketplace file with `claude plugin marketplace add <path to this folder>`, then run `claude plugin install superpowers@pinned-plugins`.
 
 ## Start a new project
 

@@ -105,26 +105,6 @@
       }
     ]
   },
-  "extraKnownMarketplaces": {
-    "pinned-plugins": {
-      "source": {
-        "source": "settings",
-        "name": "pinned-plugins",
-        "owner": { "name": "product-template" },
-        "plugins": [
-          {
-            "name": "superpowers",
-            "description": "Superpowers v7.0.1 pinned to the commit audited in docs/skill-vetting.md",
-            "source": {
-              "source": "github",
-              "repo": "obra/superpowers",
-              "sha": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b"
-            }
-          }
-        ]
-      }
-    }
-  },
   "enabledPlugins": {
     "superpowers@pinned-plugins": true
   }
